@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.2.0 
+          http://maven.apache.org/xsd/settings-1.2.0.xsd">
+  
+  <!-- Increase timeout settings for slow connections -->
+  <profiles>
+    <profile>
+      <id>timeout-settings</id>
+      <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.wagon.http.connectionTimeout>300000</maven.wagon.http.connectionTimeout>
+        <maven.wagon.http.readTimeout>300000</maven.wagon.http.readTimeout>
+      </properties>
+    </profile>
+  </profiles>
+  
+  <activeProfiles>
+    <activeProfile>timeout-settings</activeProfile>
+  </activeProfiles>
+  
+</settings>
