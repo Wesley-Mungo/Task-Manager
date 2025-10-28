@@ -179,4 +179,43 @@ The built files will be in `frontend/dist`
 MIT
 
 
+## Docker (Local Development)
+
+With Docker and docker-compose installed:
+
+```bash
+# from project root
+docker compose up --build
+```
+
+- Backend available at http://localhost:8080
+- Frontend available at http://localhost:5173
+- MySQL on localhost:3306 (user: wesley, pass: 123456)
+
+
+## CI/CD
+
+GitHub Actions workflows are included for both apps:
+- Backend: `backend/.github/workflows/ci.yml`
+- Frontend: `frontend/.github/workflows/ci.yml`
+
+These workflows:
+- Install dependencies
+- Lint/build (frontend), build jar (backend)
+- Build and push images to GHCR: `ghcr.io/<owner>/<repo>/(frontend|backend):latest`
+
+Set repository secrets if pushing to a different registry.
+
+## Deploy to Google Cloud Run
+
+See `infra/cloudrun/README.md` for detailed steps.
+
+High-level:
+1. Build and push images (via CI or Cloud Build)
+2. Deploy backend to Cloud Run with DB credentials and JWT env vars
+3. Deploy frontend to Cloud Run and point it at backend URL
+
+Remember to update CORS origins in `backend/src/main/java/com/taskmanager/security/SecurityConfig.java` with your frontend URL.
+
+
 
